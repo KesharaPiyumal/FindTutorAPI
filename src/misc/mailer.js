@@ -1,7 +1,8 @@
 const elasticEmail = require('elasticemail');
+const elasticMailer = require('./mailerCredentials');
 const client = elasticEmail.createClient({
-    username: 'null',
-    apiKey: 'null'
+  username: elasticMailer.USER_NAME,
+  apiKey: elasticMailer.KEY
 });
 
 module.exports = client;
