@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
+const DB = require('../auth/db_mysql');
 
-module.exports = new Sequelize('findtutor_db', 'ft_admin@findtutor', 'KPkln@se96', {
-  host: 'findtutor.mysql.database.azure.com',
+module.exports = new Sequelize(DB.DB_SCHEMA, DB.USER_NAME, DB.PASSWORD, {
+  host: DB.HOST,
   dialect: 'mysql',
   dialectOptions: {
     ssl: {
