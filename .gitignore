@@ -103,5 +103,6 @@ dist
 # TernJS port file
 .tern-port
 /.idea/
-/src/misc/mailerCredentials.js
+/src/auth/mailerCredentials.js
 /src/auth/db_mysql.js
+/src/auth/mongoCredentials.js
