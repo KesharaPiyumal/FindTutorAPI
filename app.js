@@ -23,6 +23,8 @@ app.use(express.static(assetsDir));
 app.use('/exam', require('./src/api/routes/examR'));
 app.use('/subject', require('./src/api/routes/subjectR'));
 app.use('/tutor', require('./src/api/routes/tutorR'));
+app.use('/student', require('./src/api/routes/studentR'));
+app.use('/user', require('./src/api/routes/common/userR'));
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, console.log('Server started on PORT: ' + PORT));

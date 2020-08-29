@@ -1,10 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../../config/database');
-const Exam = require('./exam');
-const Medium = require('./medium');
 
-const Tutor = db.define(
-  'tutor',
+const Student = db.define(
+  'student',
   {
     id: {
       type: Sequelize.BIGINT,
@@ -31,14 +29,6 @@ const Tutor = db.define(
         min: 6
       }
     },
-    examId: {
-      type: Sequelize.INTEGER,
-      AllowNull: false
-    },
-    mediumId: {
-      type: Sequelize.INTEGER,
-      AllowNull: false
-    },
     mobileNumber: {
       type: Sequelize.STRING,
       AllowNull: false
@@ -55,10 +45,6 @@ const Tutor = db.define(
       type: Sequelize.STRING,
       AllowNull: false
     },
-    age: {
-      type: Sequelize.INTEGER,
-      AllowNull: false
-    },
     isActive: {
       type: Sequelize.INTEGER
     },
@@ -73,14 +59,8 @@ const Tutor = db.define(
     }
   },
   {
-    tableName: 'tutor'
+    tableName: 'student'
   }
 );
 
-Tutor.belongsTo(Exam);
-Exam.hasMany(Tutor);
-
-Tutor.belongsTo(Medium);
-Medium.hasMany(Tutor);
-
-module.exports = Tutor;
+module.exports = Student;
