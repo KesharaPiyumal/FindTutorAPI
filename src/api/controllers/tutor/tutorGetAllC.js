@@ -1,8 +1,16 @@
-const User = require('../../models/tutor');
+const Tutor = require('../../models/tutor');
+const Exam = require('../../models/exam');
+const Medium = require('../../models/medium');
 const StatusCodes = require('../../../common/statusCodes');
 
-exports.getAllUsers = (req, res) => {
-  User.findAll({
+exports.getAllTutors = (req, res) => {
+  Tutor.findAll({
+    include: [
+      { model: Exam },
+      {
+        model: Medium
+      }
+    ],
     order: [['id', 'DESC']]
   })
     .then(usersList => {

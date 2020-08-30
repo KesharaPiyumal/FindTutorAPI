@@ -1,6 +1,7 @@
 const Student = require('../../models/student');
 const Tutor = require('../../models/tutor');
 const StatusCodes = require('../../../common/statusCodes');
+const UserType = require('../../../common/userType');
 const bCrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const JWT_KEY = require('../../jwtKey');
@@ -23,7 +24,7 @@ exports.login = (req, res, next) => {
                 message: 'Login Failed! Email Does Not Exist!',
                 data: null
               });
-            } else{
+            } else {
               if (+userItem2[0].isActive === 1) {
                 bCrypt.compare(req.body.password, userItem2[0].password, (err, result) => {
                   if (err) {
@@ -48,7 +49,7 @@ exports.login = (req, res, next) => {
                     return res.status(200).json({
                       statusCode: StatusCodes.Success,
                       message: 'Login Successful',
-                      data: { token: token }
+                      data: { token: token, type: UserType.Tutor }
                     });
                     // });
                   } else {
@@ -100,7 +101,7 @@ exports.login = (req, res, next) => {
               return res.status(200).json({
                 statusCode: StatusCodes.Success,
                 message: 'Login Successful',
-                data: { token: token }
+                data: { token: token, type: UserType.Student }
               });
               // });
             } else {

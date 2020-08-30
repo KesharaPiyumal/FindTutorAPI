@@ -3,7 +3,7 @@ const router = express.Router();
 const StatusCodes = require('../../common/statusCodes');
 const tutorRegisterC = require('../controllers/tutor/tutorRegisterC');
 
-const getAllUsersC = require('../controllers/tutor/userGetAllC');
+const getAllTutorC = require('../controllers/tutor/tutorGetAllC');
 const uploadProfileImageC = require('../controllers/tutor/uploadProfileImageC');
 const getProfileImageC = require('../controllers/tutor/getProfileImageC');
 const upload = require('../helpers/imageUploader');
@@ -15,6 +15,14 @@ router.post(
     next();
   },
   tutorRegisterC.register
+);
+
+router.post(
+  '/all',
+  (req, res, next) => {
+    next();
+  },
+  getAllTutorC.getAllTutors
 );
 
 // router.post(
