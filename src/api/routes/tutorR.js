@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const StatusCodes = require('../../common/statusCodes');
 const tutorRegisterC = require('../controllers/tutor/tutorRegisterC');
-
 const getAllTutorC = require('../controllers/tutor/tutorGetAllC');
+const getAllTutorFilteredC = require('../controllers/tutor/tutorGetAllByFilter');
+
 const uploadProfileImageC = require('../controllers/tutor/uploadProfileImageC');
 const getProfileImageC = require('../controllers/tutor/getProfileImageC');
 const upload = require('../helpers/imageUploader');
@@ -23,6 +24,14 @@ router.post(
     next();
   },
   getAllTutorC.getAllTutors
+);
+
+router.post(
+  '/filteredAll',
+  (req, res, next) => {
+    next();
+  },
+  getAllTutorFilteredC.getAllFilteredTutors
 );
 
 // router.post(

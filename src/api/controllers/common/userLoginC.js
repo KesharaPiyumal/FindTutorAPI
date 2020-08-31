@@ -39,6 +39,8 @@ exports.login = (req, res, next) => {
                       {
                         email: userItem2[0].email,
                         userId: userItem2[0].id,
+                        latitude: userItem2[0].latitude,
+                        longitude: userItem2[0].longitude,
                         displayName: userItem2[0].firstName + ' ' + userItem2[0].lastName
                       },
                       JWT_KEY,
@@ -91,6 +93,8 @@ exports.login = (req, res, next) => {
                 {
                   email: userItem1[0].email,
                   userId: userItem1[0].id,
+                  latitude: userItem1[0].latitude,
+                  longitude: userItem1[0].longitude,
                   displayName: userItem1[0].firstName + ' ' + userItem1[0].lastName
                 },
                 JWT_KEY,

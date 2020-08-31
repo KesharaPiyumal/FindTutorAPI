@@ -106,3 +106,4 @@ dist
 /src/auth/mailerCredentials.js
 /src/auth/db_mysql.js
 /src/auth/mongoCredentials.js
+/src/auth/gMapAPIKey.js
