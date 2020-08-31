@@ -5,6 +5,7 @@ const Subject = require('../../models/subject');
 const Medium = require('../../models/medium');
 const StatusCodes = require('../../../common/statusCodes');
 const GeoDist = require('geodist');
+const log = require('log4js').getLogger('tutorFilter');
 
 exports.getAllFilteredTutors = (req, res) => {
   try {
@@ -37,11 +38,19 @@ exports.getAllFilteredTutors = (req, res) => {
         }
       })
       .catch(e => {
+        log.error(e);
         return res.status(200).json({
           data: null,
-          message: 'Get all user list DB error!',
-          statusCode: StatusCodes.DBError
+          message: 'Get all user list server error!',
+          statusCode: StatusCodes.ServerError
         });
       });
-  } catch (e) {}
+  } catch (e) {
+    log.error(e);
+    return res.status(200).json({
+      data: null,
+      message: 'Get all user list DB error!',
+      statusCode: StatusCodes.DBError
+    });
+  }
 };
