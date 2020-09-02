@@ -3,18 +3,12 @@ const StatusCodes = require('../../../common/statusCodes');
 
 exports.getAllSubjectsForExamAndMedium = (req, res) => {
   Subject.findAll({
-    where: { examId: req.body['examId'] }
+    where: { examId: req.body['examId'], mediumId: req.body['mediumId'] }
   })
     .then(subjectList => {
       if (subjectList.length > 0) {
-        const subjectsArray = [];
-        subjectList.forEach(item => {
-          if (item.mediumId === req.body['mediumId'] || item.mediumId === 3) {
-            subjectsArray.push(item);
-          }
-        });
         res.status(200).json({
-          data: subjectsArray,
+          data: subjectList,
           message: 'Get all subjects successfully!',
           statusCode: StatusCodes.Success
         });
