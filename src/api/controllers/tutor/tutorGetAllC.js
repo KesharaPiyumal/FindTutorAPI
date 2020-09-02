@@ -1,16 +1,13 @@
 const Tutor = require('../../models/tutor');
 const Exam = require('../../models/exam');
+const SubjectTutor = require('../../models/subjectTutor');
+const Subject = require('../../models/subject');
 const Medium = require('../../models/medium');
 const StatusCodes = require('../../../common/statusCodes');
 
 exports.getAllTutors = (req, res) => {
   Tutor.findAll({
-    include: [
-      { model: Exam },
-      {
-        model: Medium
-      }
-    ],
+    include: [{ model: Exam }, { model: Medium }, { model: SubjectTutor, include: [{ model: Subject }] }],
     order: [['id', 'DESC']]
   })
     .then(usersList => {
@@ -29,7 +26,6 @@ exports.getAllTutors = (req, res) => {
       }
     })
     .catch(e => {
-      log.error(e);
       return res.status(200).json({
         data: null,
         message: 'Get all user list DB error!',

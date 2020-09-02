@@ -21,7 +21,6 @@ exports.getAllExams = (req, res) => {
       }
     })
     .catch(e => {
-      log.error(e);
       return res.status(200).json({
         data: null,
         message: 'Get all exam list DB error!',

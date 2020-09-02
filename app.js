@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./src/config/database');
 const assetsDir = require('path').join(__dirname, '/assets');
-const log4js = require('log4js');
 
 
 // Test mySql connection
@@ -16,9 +15,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-log4js.configure('./config/configLog4js.json');
-app.use(log4js.connectLogger(log4js.getLogger('http'), { level: 'auto' }));
 
 // access to assets folder
 app.use(express.static(assetsDir));

@@ -21,7 +21,6 @@ exports.getAllSubjectsForExamAndMedium = (req, res) => {
       }
     })
     .catch(e => {
-      log.error(e);
       return res.status(200).json({
         data: null,
         message: 'Get all subject list DB error!',
