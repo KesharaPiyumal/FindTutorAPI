@@ -14,6 +14,8 @@ exports.getAllFilteredTutors = (req, res) => {
     })
       .then(usersList => {
         if (usersList.length > 0) {
+          const latMy = req.body.lat;
+          const lngMy = req.body.lng;
           if (req.body['distanceRange'] && req.body['subjectIds']['length']) {
             const filteredTutorList = getFilteredByDistance(req, usersList);
             const finalFilteredTutorList = getFilteredByMediumAndExamAndSubjects(req, filteredTutorList);
@@ -23,28 +25,49 @@ exports.getAllFilteredTutors = (req, res) => {
               statusCode: StatusCodes.Success
             });
           } else if (req.body['distanceRange'] === null && req.body['subjectIds']['length']) {
-            const finalFilteredTutorList = getFilteredByMediumAndExamAndSubjects(req, usersList);
+            const tempTutorList = getFilteredByMediumAndExamAndSubjects(req, usersList);
+            tempTutorList.forEach(user => {
+              user['distanceRange'] = GeoDist(
+                { lat: latMy, lon: lngMy },
+                { lat: user.latitude, lon: user.longitude },
+                { exact: true, unit: 'km' }
+              );
+            });
             res.status(200).json({
-              data: finalFilteredTutorList,
+              data: tempTutorList,
               message: 'Get all tutor successfully!',
               statusCode: StatusCodes.Success
             });
-          } else if (req.body['distanceRange'] && req.body['subjectIds'] === []) {
-            const filteredTutorList = getFilteredByDistance(req, usersList);
-            const finalFilteredTutorList = getFilteredByMediumAndExam(req, filteredTutorList);
+          } else if (req.body['distanceRange'] && req.body['subjectIds']['length'] === 0) {
+            const tempTutorList = getFilteredByMediumAndExam(req, usersList);
+            const finalFilteredTutorList = getFilteredByDistance(req, tempTutorList);
             res.status(200).json({
               data: finalFilteredTutorList,
               message: 'Get all tutor successfully!',
               statusCode: StatusCodes.Success
             });
           } else if (req.body['distanceRange'] === null && req.body['subjectIds']['length'] === 0) {
-            const finalFilteredTutorList = getFilteredByMediumAndExam(req, usersList);
+            const tempTutorList = getFilteredByMediumAndExam(req, usersList);
+            tempTutorList.forEach(user => {
+              user['distanceRange'] = GeoDist(
+                { lat: latMy, lon: lngMy },
+                { lat: user.latitude, lon: user.longitude },
+                { exact: true, unit: 'km' }
+              );
+            });
             res.status(200).json({
-              data: finalFilteredTutorList,
+              data: tempTutorList,
               message: 'Get all tutor successfully!',
               statusCode: StatusCodes.Success
             });
           } else {
+            usersList.forEach(user => {
+              user['distanceRange'] = GeoDist(
+                { lat: latMy, lon: lngMy },
+                { lat: user.latitude, lon: user.longitude },
+                { exact: true, unit: 'km' }
+              );
+            });
             res.status(200).json({
               data: usersList,
               message: 'Get all tutor successfully!',
@@ -80,8 +103,12 @@ function getFilteredByDistance(req, usersList) {
   const lngMy = req.body.lng;
   const tutorList = [];
   usersList.forEach(user => {
-    const distance = GeoDist({ lat: latMy, lon: lngMy }, { lat: user.latitude, lon: user.longitude }, { exact: true, unit: 'km' });
-    if (distance <= req.body['distanceRange']) {
+    user['distanceRange'] = GeoDist(
+      { lat: latMy, lon: lngMy },
+      { lat: user.latitude, lon: user.longitude },
+      { exact: true, unit: 'km' }
+    );
+    if (user['distanceRange'] <= req.body['distanceRange']) {
       tutorList.push(user);
     }
   });

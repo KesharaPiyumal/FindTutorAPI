@@ -59,11 +59,18 @@ const Tutor = db.define(
       type: Sequelize.INTEGER,
       AllowNull: false
     },
+    gender: {
+      type: Sequelize.STRING,
+      AllowNull: false
+    },
     isActive: {
       type: Sequelize.INTEGER
     },
     secretToken: {
       type: Sequelize.STRING
+    },
+    distanceRange: {
+      type: Sequelize.NUMBER
     },
     createdAt: {
       type: Sequelize.DATE

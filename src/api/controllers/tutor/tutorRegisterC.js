@@ -42,7 +42,9 @@ exports.register = (req, res) => {
                     email: req.body.email,
                     password: hash,
                     secretToken: secretToken,
-                    isActive: 0
+                    isActive: 0,
+                    age: req.body.age,
+                    gender: req.body.gender
                   },
                   { transaction: t }
                 )
