@@ -1,6 +1,7 @@
 const Tutor = require('../../models/tutor');
 const Exam = require('../../models/exam');
 const SubjectTutor = require('../../models/subjectTutor');
+const StudentTutorRate = require('../../models/studentTutorRate');
 const Subject = require('../../models/subject');
 const Medium = require('../../models/medium');
 const StatusCodes = require('../../../common/statusCodes');
@@ -9,7 +10,7 @@ const GeoDist = require('geodist');
 exports.getAllFilteredTutors = (req, res) => {
   try {
     Tutor.findAll({
-      include: [{ model: Exam }, { model: Medium }, { model: SubjectTutor, include: [{ model: Subject }] }],
+      include: [{ model: Exam }, { model: Medium }, { model: SubjectTutor, include: [{ model: Subject }] }, { model: StudentTutorRate }],
       order: [['id', 'DESC']]
     })
       .then(usersList => {
@@ -103,11 +104,7 @@ function getFilteredByDistance(req, usersList) {
   const lngMy = req.body.lng;
   const tutorList = [];
   usersList.forEach(user => {
-    user['distanceRange'] = GeoDist(
-      { lat: latMy, lon: lngMy },
-      { lat: user.latitude, lon: user.longitude },
-      { exact: true, unit: 'km' }
-    );
+    user['distanceRange'] = GeoDist({ lat: latMy, lon: lngMy }, { lat: user.latitude, lon: user.longitude }, { exact: true, unit: 'km' });
     if (user['distanceRange'] <= req.body['distanceRange']) {
       tutorList.push(user);
     }

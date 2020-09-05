@@ -1,6 +1,7 @@
 const Tutor = require('../../models/tutor');
 const Exam = require('../../models/exam');
 const SubjectTutor = require('../../models/subjectTutor');
+const StudentTutorRate = require('../../models/studentTutorRate');
 const Subject = require('../../models/subject');
 const Medium = require('../../models/medium');
 const StatusCodes = require('../../../common/statusCodes');
@@ -8,7 +9,7 @@ const GeoDist = require('geodist');
 
 exports.getAllTutors = (req, res) => {
   Tutor.findAll({
-    include: [{ model: Exam }, { model: Medium }, { model: SubjectTutor, include: [{ model: Subject }] }],
+    include: [{ model: Exam }, { model: Medium }, { model: SubjectTutor, include: [{ model: Subject }] }, { model: StudentTutorRate }],
     order: [['id', 'DESC']]
   })
     .then(usersList => {
