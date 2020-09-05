@@ -72,6 +72,9 @@ const Tutor = db.define(
     distanceRange: {
       type: Sequelize.NUMBER
     },
+    about: {
+      type: Sequelize.STRING
+    },
     createdAt: {
       type: Sequelize.DATE
     },

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const StatusCodes = require('../../common/statusCodes');
 const tutorRegisterC = require('../controllers/tutor/tutorRegisterC');
+const updateTutorC = require('../controllers/tutor/updateTutorC');
 const getAllTutorC = require('../controllers/tutor/tutorGetAllC');
 const getAllTutorFilteredC = require('../controllers/tutor/tutorGetAllByFilter');
 
@@ -32,6 +33,14 @@ router.post(
     next();
   },
   getAllTutorFilteredC.getAllFilteredTutors
+);
+
+router.post(
+  '/update',
+  (req, res, next) => {
+    next();
+  },
+  updateTutorC.update
 );
 
 // router.post(

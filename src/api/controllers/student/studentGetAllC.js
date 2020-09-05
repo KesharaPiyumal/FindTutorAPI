@@ -1,8 +1,10 @@
-const User = require('../../models/tutor');
+const Student = require('../../models/student');
+const StudentTutorRate = require('../../models/studentTutorRate');
 const StatusCodes = require('../../../common/statusCodes');
 
-exports.getAllUsers = (req, res) => {
-  User.findAll({
+exports.getAllStudents = (req, res) => {
+  Student.findAll({
+    include: [{ model: StudentTutorRate }],
     order: [['id', 'DESC']]
   })
     .then(usersList => {
