@@ -75,6 +75,9 @@ const Tutor = db.define(
     about: {
       type: Sequelize.STRING
     },
+    geoAddress: {
+      type: Sequelize.STRING
+    },
     createdAt: {
       type: Sequelize.DATE
     },
