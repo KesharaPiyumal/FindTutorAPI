@@ -4,6 +4,7 @@ const StatusCodes = require('../../common/statusCodes');
 const tutorRegisterC = require('../controllers/tutor/tutorRegisterC');
 const updateTutorC = require('../controllers/tutor/updateTutorC');
 const getAllTutorC = require('../controllers/tutor/tutorGetAllC');
+const getOneTutorC = require('../controllers/tutor/getTutorC');
 const getAllTutorFilteredC = require('../controllers/tutor/tutorGetAllByFilter');
 
 const uploadProfileImageC = require('../controllers/tutor/uploadProfileImageC');
@@ -41,6 +42,14 @@ router.post(
     next();
   },
   updateTutorC.update
+);
+
+router.post(
+  '/one',
+  (req, res, next) => {
+    next();
+  },
+  getOneTutorC.getOneTutor
 );
 
 // router.post(
