@@ -3,6 +3,7 @@ const router = express.Router();
 const studentRegisterC = require('../controllers/student/studentRegisterC');
 const rateTutorC = require('../controllers/student/rateTutorC');
 const getAllStudentsC = require('../controllers/student/studentGetAllC');
+const studentTutorRateC = require('../controllers/student/studentTutorRateC');
 const StatusCodes = require('../../common/statusCodes');
 
 const uploadProfileImageC = require('../controllers/tutor/uploadProfileImageC');
@@ -32,6 +33,22 @@ router.post(
     next();
   },
   rateTutorC.rateTutor
+);
+
+router.post(
+  '/getTutorRates',
+  (req, res, next) => {
+    next();
+  },
+  studentTutorRateC.getAllStudentTutorRate
+);
+
+router.post(
+  '/addReview',
+  (req, res, next) => {
+    next();
+  },
+  studentTutorRateC.addReview
 );
 
 module.exports = router;

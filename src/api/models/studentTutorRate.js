@@ -15,15 +15,18 @@ const StudentTutorRate = db.define(
     },
     studentId: {
       type: Sequelize.BIGINT,
-      AllowNull: false,
+      AllowNull: false
     },
     tutorId: {
       type: Sequelize.BIGINT,
-      AllowNull: false,
+      AllowNull: false
     },
     rateId: {
       type: Sequelize.INTEGER,
-      AllowNull: false,
+      AllowNull: false
+    },
+    review: {
+      type: Sequelize.STRING
     },
     createdAt: {
       type: Sequelize.DATE
