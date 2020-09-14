@@ -20,7 +20,18 @@ exports.update = (req, res) => {
               { transaction: t }
             );
             if (tutor) {
-              await Tutor.update({ about: req.body.about, geoAddress: gAddress }, { where: { id: req.body.tutorId }, transaction: t });
+              await Tutor.update(
+                {
+                  about: req.body.about,
+                  geoAddress: gAddress,
+                  highestEducationQualification: req.body.highestEducationQualification,
+                  higherStudiedAt: req.body.higherStudiedAt,
+                  secondaryStudiedAt: req.body.secondaryStudiedAt,
+                  primaryStudiedAt: req.body.primaryStudiedAt,
+                  mobileNumber: req.body.mobileNumber
+                },
+                { where: { id: req.body.tutorId }, transaction: t }
+              );
             }
           })
             .then(() => {

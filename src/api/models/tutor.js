@@ -78,6 +78,18 @@ const Tutor = db.define(
     geoAddress: {
       type: Sequelize.STRING
     },
+    highestEducationQualification: {
+      type: Sequelize.STRING
+    },
+    higherStudiedAt: {
+      type: Sequelize.STRING
+    },
+    secondaryStudiedAt: {
+      type: Sequelize.STRING
+    },
+    primaryStudiedAt: {
+      type: Sequelize.STRING
+    },
     createdAt: {
       type: Sequelize.DATE
     },
